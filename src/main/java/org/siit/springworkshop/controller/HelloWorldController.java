@@ -2,18 +2,18 @@ package org.siit.springworkshop.controller;
 
 import org.siit.springworkshop.dto.StudentDto;
 import org.siit.springworkshop.exception.AgeException;
-import org.siit.springworkshop.service.HelloWorldService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.siit.springworkshop.service.IService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/hello-world")
 public class HelloWorldController {
 
-    private final HelloWorldService helloWorldService;
+    private final IService service;
 
-    public HelloWorldController(HelloWorldService helloWorldService) {
-        this.helloWorldService = helloWorldService;
+    public HelloWorldController(IService service) {
+        this.service = service;
     }
 
     @GetMapping("/greet")
@@ -27,7 +27,7 @@ public class HelloWorldController {
     public String helloWorldPathParams(@PathVariable(name = "firstName") String firstName,
                                        @PathVariable(name = "lastName") String lastName,
                                        @RequestParam(required = false, defaultValue = "6", name = "age") Integer age) throws AgeException {
-        return helloWorldService.greet(firstName, lastName, age);
+        return service.greet(firstName, lastName, age) + service.getCurrentTime();
     }
 
     @PostMapping("/greet")
