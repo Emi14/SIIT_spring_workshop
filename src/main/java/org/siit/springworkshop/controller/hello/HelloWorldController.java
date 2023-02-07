@@ -1,9 +1,8 @@
-package org.siit.springworkshop.controller;
+package org.siit.springworkshop.controller.hello;
 
 import org.siit.springworkshop.dto.StudentDto;
 import org.siit.springworkshop.exception.AgeException;
-import org.siit.springworkshop.service.IService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.siit.springworkshop.service.hello.IService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

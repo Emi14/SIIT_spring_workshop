@@ -1,4 +1,4 @@
-package org.siit.springworkshop.service;
+package org.siit.springworkshop.service.hello;
 
 import org.siit.springworkshop.exception.AgeException;
 

@@ -1,23 +1,19 @@
-package org.siit.springworkshop.service;
+package org.siit.springworkshop.service.hello;
 
 import org.siit.springworkshop.exception.AgeException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.WebApplicationContext;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.List;
 import java.util.StringTokenizer;
 
 
 @Service
+@Profile("dev")
 //@Qualifier("service")
-@Primary
+//@Primary
 //@Lazy
 //@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) - default behaviour
 //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -32,6 +28,10 @@ public class HelloWorldService implements IService{
 //    @Value("my name") // can be used with SpEl
     @Value("${my.name}")
     private String name;
+
+    @Value("#{'${my.values}'.split(',')}")
+    private List<String> values;
+
 
     @Autowired
     public void setStringTokenizer(StringTokenizer stringTokenizer) {

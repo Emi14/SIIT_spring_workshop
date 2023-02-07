@@ -1,10 +1,10 @@
-package org.siit.springworkshop.service;
+package org.siit.springworkshop.service.hello;
 
-import org.siit.springworkshop.exception.AgeException;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("test")
 //@Qualifier("serviceImplementation")
 public class GreetService implements IService{
     @Override
