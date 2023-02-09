@@ -1,13 +1,10 @@
 package org.siit.springworkshop.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.siit.springworkshop.entity.AddressEntity;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 //POJO
 
@@ -15,7 +12,6 @@ import java.util.List;
 public class StudentDto {
     private Long id;
 
-    //not working
     @NotEmpty(message = "First name cannot be null!")
     private String firstName;
 
@@ -28,6 +24,4 @@ public class StudentDto {
     @NotEmpty(message = "Email cannot be null!")
     @Email(message = "Email is invalid")
     private String email;
-
-    private List<AddressDto> addresses;
 }

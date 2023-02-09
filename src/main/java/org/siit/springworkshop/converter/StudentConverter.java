@@ -21,4 +21,17 @@ public class StudentConverter {
 
         return student;
     }
+
+    public static StudentDto fromEntityToDto(StudentEntity studentEntity)
+    {
+        StudentDto studentDto = new StudentDto();
+
+        studentDto.setId(studentEntity.getId());
+        studentDto.setFirstName(studentEntity.getFirstName());
+        studentDto.setLastName(studentEntity.getLastName());
+        studentDto.setAge(studentEntity.getAge());
+        studentDto.setEmail(studentEntity.getEmail());
+
+        return studentDto;
+    }
 }
