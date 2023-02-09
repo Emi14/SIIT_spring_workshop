@@ -1,138 +1,138 @@
 {
-	"info": {
-		"_postman_id": "440773dd-e43a-498b-abc4-0705d51a9974",
-		"name": "SIIT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "776384"
-	},
-	"item": [
-		{
-			"name": "Post student",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Dorel\",\r\n    \"age\": 16,\r\n    \"email\": \"dorelvasile\",\r\n    \"addresses\": [\r\n        {\r\n            \"street\": \"Dristor\",\r\n            \"streetNumber\": 12,\r\n            \"zipCode\": \"301554\",\r\n            \"city\": \"Bucharest\",\r\n            \"country\": \"Romania\"\r\n        },\r\n        {\r\n            \"street\": \"Unirii\",\r\n            \"streetNumber\": 24,\r\n            \"zipCode\": \"451212\",\r\n            \"city\": \"Zalau\",\r\n            \"country\": \"Romania\"\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8090/student/save",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"student",
-						"save"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Search student",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\":\"Gigel\",\r\n    \"lastName\":\"Vasilica\",\r\n    \"age\":20\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8090/student/search/123",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"student",
-						"search",
-						"123"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Search student by first Name and age",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\":\"Gigel\",\r\n    \"lastName\":\"Vasilica\",\r\n    \"age\":20\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8090/student/search?firstName=or&age=25",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"student",
-						"search"
-					],
-					"query": [
-						{
-							"key": "firstName",
-							"value": "or"
-						},
-						{
-							"key": "age",
-							"value": "25"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Greet",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8090/hello-world/greet/Gigel/Vasile?age=1000",
-					"host": [
-						"localhost"
-					],
-					"port": "8090",
-					"path": [
-						"hello-world",
-						"greet",
-						"Gigel",
-						"Vasile"
-					],
-					"query": [
-						{
-							"key": "age",
-							"value": "1000"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "440773dd-e43a-498b-abc4-0705d51a9974",
+    "name": "SIIT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "776384"
+  },
+  "item": [
+    {
+      "name": "Post student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"Dorel\",\r\n    \"age\": 16,\r\n    \"email\": \"dorelvasile\",\r\n    \"addresses\": [\r\n        {\r\n            \"street\": \"Dristor\",\r\n            \"streetNumber\": 12,\r\n            \"zipCode\": \"301554\",\r\n            \"city\": \"Bucharest\",\r\n            \"country\": \"Romania\"\r\n        },\r\n        {\r\n            \"street\": \"Unirii\",\r\n            \"streetNumber\": 24,\r\n            \"zipCode\": \"451212\",\r\n            \"city\": \"Zalau\",\r\n            \"country\": \"Romania\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8090/student/save",
+          "host": [
+            "localhost"
+          ],
+          "port": "8090",
+          "path": [
+            "student",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search student",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\":\"Gigel\",\r\n    \"lastName\":\"Vasilica\",\r\n    \"age\":20\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8090/student/search/123",
+          "host": [
+            "localhost"
+          ],
+          "port": "8090",
+          "path": [
+            "student",
+            "search",
+            "123"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search student by first Name and age",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\":\"Gigel\",\r\n    \"lastName\":\"Vasilica\",\r\n    \"age\":20\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8090/student/search?firstName=or&age=25",
+          "host": [
+            "localhost"
+          ],
+          "port": "8090",
+          "path": [
+            "student",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "firstName",
+              "value": "or"
+            },
+            {
+              "key": "age",
+              "value": "25"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Greet",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8090/hello-world/greet/Gigel/Vasile?age=1000",
+          "host": [
+            "localhost"
+          ],
+          "port": "8090",
+          "path": [
+            "hello-world",
+            "greet",
+            "Gigel",
+            "Vasile"
+          ],
+          "query": [
+            {
+              "key": "age",
+              "value": "1000"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }
