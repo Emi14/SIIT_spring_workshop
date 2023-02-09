@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class StudentService {
 
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -27,8 +27,7 @@ public class StudentService {
     public StudentDto getStudentById(Long id) throws DataNotFound {
         Optional<StudentEntity> student = studentRepository.findById(id);
 
-        if(student.isEmpty())
-        {
+        if (student.isEmpty()) {
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", id));
         }
         return StudentConverter.fromEntityToDto(student.get());
@@ -39,8 +38,7 @@ public class StudentService {
 //        List<StudentEntity> student = studentRepository.findAllByFirstNameAndAge(firstName, age);
         List<StudentEntity> student = studentRepository.findAllByFirstNameAndAge(firstName, age);
 
-        if(student.isEmpty())
-        {
+        if (student.isEmpty()) {
             throw new DataNotFound(String.format("The student with first name %s and age %s could not be found in database.", firstName, age));
         }
         return StudentConverter.fromEntityToDto(student.get(0));
@@ -52,8 +50,7 @@ public class StudentService {
 //        Optional<StudentEntity> student = studentRepository.findFirstByFirstNameContainingAndAgeGreaterThan(firstName, age);
         Optional<StudentEntity> student = studentRepository.findFirstByFirstNameOrderByIdDesc(firstName);
 
-        if(student.isEmpty())
-        {
+        if (student.isEmpty()) {
             throw new DataNotFound(String.format("The student with first name %s and age %s could not be found in database.", firstName, age));
         }
         return StudentConverter.fromEntityToDto(student.get());

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
 
-//    @Query(value = "SELECT * FROM STUDENTS WHERE first_name = ? and age = ?", nativeQuery = true)
+    //    @Query(value = "SELECT * FROM STUDENTS WHERE first_name = ? and age = ?", nativeQuery = true)
 //    @Query(value = "SELECT s FROM students s where s.firstName = ?1 and s.age = ?2")
     @Query(value = "SELECT s FROM students s where s.age = :age and s.firstName = :name")
     List<StudentEntity> findStudent(@Param("name") String firstName, int age);

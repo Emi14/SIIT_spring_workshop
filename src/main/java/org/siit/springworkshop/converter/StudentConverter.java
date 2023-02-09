@@ -5,12 +5,10 @@ import org.siit.springworkshop.entity.StudentEntity;
 
 public class StudentConverter {
 
-    public static StudentEntity fromDtoToEntity(StudentDto studentDto)
-    {
+    public static StudentEntity fromDtoToEntity(StudentDto studentDto) {
         StudentEntity student = new StudentEntity();
 
-        if(studentDto.getId() != null)
-        {
+        if (studentDto.getId() != null) {
             student.setId(studentDto.getId());
         }
 
@@ -22,8 +20,7 @@ public class StudentConverter {
         return student;
     }
 
-    public static StudentDto fromEntityToDto(StudentEntity studentEntity)
-    {
+    public static StudentDto fromEntityToDto(StudentEntity studentEntity) {
         StudentDto studentDto = new StudentDto();
 
         studentDto.setId(studentEntity.getId());
