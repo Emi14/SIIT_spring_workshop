@@ -1,5 +1,6 @@
 package org.siit.springworkshop;
 
+import org.modelmapper.ModelMapper;
 import org.siit.springworkshop.service.hello.HelloWorldService;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,5 +37,10 @@ public class SpringWorkshopApplication {
 		return null;
 	}
 
+	@Bean
+	public ModelMapper getMapper()
+	{
+		return new ModelMapper();
+	}
 
 }

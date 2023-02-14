@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AddressRepository extends CrudRepository<AddressEntity, Long> {
+
+    int deleteAddressEntitiesByStudentId(Long studentId);
+
 }

@@ -4,9 +4,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 //POJO
 
 @Data
+@NoArgsConstructor
 public class StudentDto {
     private Long id;
 
@@ -22,4 +26,7 @@ public class StudentDto {
     @NotEmpty(message = "Email cannot be null!")
     @Email(message = "Email is invalid")
     private String email;
+
+    @NotEmpty(message = "At least one address should be sent")
+    private List<AddressDto> addresses;
 }

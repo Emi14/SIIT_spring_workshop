@@ -19,8 +19,10 @@ public class StudentController {
     }
 
     @PostMapping("/save")
-    public Long postMessage(@Valid @RequestBody StudentDto studentDto) {
-        return studentService.saveStudent(studentDto);
+    public Long postMessage(@Valid @RequestBody StudentDto studentDto,
+                            @RequestHeader(name = "debugHeaderThrowExceptionOnSave", defaultValue = "false") boolean throwExceptionOnSave) {
+//        return studentService.saveStudent(studentDto, throwExceptionOnSave);
+        return studentService.saveStudentWithCascade(studentDto);
     }
 
     @GetMapping("/search/{id}")
@@ -39,6 +41,20 @@ public class StudentController {
                                                      @RequestParam(name = "age") Integer age) throws DataNotFound {
         return studentService.getStudentByFirstNameAndAge(firstName, age);
 //        return studentService.getStudentByFirstNameContainingAndAgeGreaterThan(firstName, age);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteStudentById(@PathVariable(name = "id") String studentId,
+                                                    @RequestHeader(name = "debugHeaderThrowExceptionOnSave", defaultValue = "false") boolean throwExceptionOnSave) throws DataNotFound {
+        Long id;
+        try {
+            id = Long.valueOf(studentId);
+        } catch (NumberFormatException e) {
+            return new ResponseEntity<>("The given id is not a number.", HttpStatus.BAD_REQUEST);
+        }
+//        studentService.deleteStudentById(id, throwExceptionOnSave);
+        studentService.deleteStudentWithCascade(id);
+        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
 }

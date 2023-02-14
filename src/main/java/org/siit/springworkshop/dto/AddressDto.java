@@ -3,9 +3,10 @@ package org.siit.springworkshop.dto;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class AddressDto {
 
     private Long id;

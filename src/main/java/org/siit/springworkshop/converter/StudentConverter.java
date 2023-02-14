@@ -1,34 +1,46 @@
 package org.siit.springworkshop.converter;
 
+import org.modelmapper.ModelMapper;
 import org.siit.springworkshop.dto.StudentDto;
 import org.siit.springworkshop.entity.StudentEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StudentConverter {
 
-    public static StudentEntity fromDtoToEntity(StudentDto studentDto) {
-        StudentEntity student = new StudentEntity();
+    private final ModelMapper mapper;
 
-        if (studentDto.getId() != null) {
-            student.setId(studentDto.getId());
-        }
-
-        student.setAge(studentDto.getAge());
-        student.setFirstName(studentDto.getFirstName());
-        student.setLastName(studentDto.getLastName());
-        student.setEmail(studentDto.getEmail());
-
-        return student;
+    public StudentConverter(ModelMapper mapper) {
+        this.mapper = mapper;
     }
 
-    public static StudentDto fromEntityToDto(StudentEntity studentEntity) {
-        StudentDto studentDto = new StudentDto();
+    public StudentEntity fromDtoToEntity(StudentDto studentDto) {
+//        StudentEntity student = new StudentEntity();
+//
+//        if (studentDto.getId() != null) {
+//            student.setId(studentDto.getId());
+//        }
+//
+//        student.setAge(studentDto.getAge());
+//        student.setFirstName(studentDto.getFirstName());
+//        student.setLastName(studentDto.getLastName());
+//        student.setEmail(studentDto.getEmail());
+//
+//        return student;
+        return mapper.map(studentDto, StudentEntity.class);
+    }
 
-        studentDto.setId(studentEntity.getId());
-        studentDto.setFirstName(studentEntity.getFirstName());
-        studentDto.setLastName(studentEntity.getLastName());
-        studentDto.setAge(studentEntity.getAge());
-        studentDto.setEmail(studentEntity.getEmail());
+    public StudentDto fromEntityToDto(StudentEntity studentEntity) {
+//        StudentDto studentDto = new StudentDto();
+//
+//        studentDto.setId(studentEntity.getId());
+//        studentDto.setFirstName(studentEntity.getFirstName());
+//        studentDto.setLastName(studentEntity.getLastName());
+//        studentDto.setAge(studentEntity.getAge());
+//        studentDto.setEmail(studentEntity.getEmail());
+//
+//        return studentDto;
 
-        return studentDto;
+        return mapper.map(studentEntity, StudentDto.class);
     }
 }

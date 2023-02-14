@@ -1,9 +1,6 @@
 package org.siit.springworkshop.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity(name = "addresses")
@@ -23,4 +20,8 @@ public class AddressEntity {
     private String city;
 
     private String country;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", nullable = false)
+    private StudentEntity student;
 }

@@ -3,6 +3,8 @@ package org.siit.springworkshop.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity(name = "students")
 @Data
 public class StudentEntity {
@@ -18,5 +20,11 @@ public class StudentEntity {
     private int age;
 
     private String email;
+
+//    @OneToMany
+//    @JoinColumn(name = "student_id")
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<AddressEntity> addresses;
+
 
 }
