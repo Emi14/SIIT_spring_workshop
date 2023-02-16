@@ -1,8 +1,12 @@
 package org.siit.springworkshop.repository;
 
 import org.siit.springworkshop.entity.StudentEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +29,12 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
 
     List<StudentEntity> findFirstThreeByFirstName(String name);
 
+    @Modifying
+    @Query(value = "UPDATE students s SET s.age = :age WHERE s.id = :studentId")
+    int updateStudentAge(Long studentId, int age);
+
+    List<StudentEntity> findAllByAddresses_City(String city);
+
+    List<StudentEntity> findAll(Pageable pageable); //todo how to eliminate count query
+    List<StudentEntity> findAll(Sort sort);
 }

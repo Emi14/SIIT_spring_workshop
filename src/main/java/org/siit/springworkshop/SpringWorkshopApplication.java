@@ -1,6 +1,8 @@
 package org.siit.springworkshop;
 
 import org.modelmapper.ModelMapper;
+import org.siit.springworkshop.dto.StudentDto;
+import org.siit.springworkshop.entity.StudentEntity;
 import org.siit.springworkshop.service.hello.HelloWorldService;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.beans.factory.annotation.Qualifier;

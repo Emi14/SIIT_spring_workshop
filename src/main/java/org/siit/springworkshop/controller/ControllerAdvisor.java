@@ -19,8 +19,7 @@ import java.util.Map;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({AgeException.class,
-            DataNotFound.class})
+    @ExceptionHandler({AgeException.class, DataNotFound.class})
     public ResponseEntity<Object> handleAgeException(Exception ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(),
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, webRequest);

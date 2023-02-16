@@ -15,19 +15,24 @@ public class StudentConverter {
     }
 
     public StudentEntity fromDtoToEntity(StudentDto studentDto) {
-//        StudentEntity student = new StudentEntity();
-//
-//        if (studentDto.getId() != null) {
-//            student.setId(studentDto.getId());
-//        }
-//
-//        student.setAge(studentDto.getAge());
-//        student.setFirstName(studentDto.getFirstName());
-//        student.setLastName(studentDto.getLastName());
-//        student.setEmail(studentDto.getEmail());
-//
-//        return student;
-        return mapper.map(studentDto, StudentEntity.class);
+        StudentEntity student = new StudentEntity();
+
+        if (studentDto.getId() != null) {
+            student.setId(studentDto.getId());
+        }
+
+        student.setAge(studentDto.getAge());
+        student.setFirstName(studentDto.getFirstName());
+        student.setLastName(studentDto.getLastName());
+        student.setEmail(studentDto.getEmail());
+        student.setGender(studentDto.getGender().getDbValue());
+
+        return student;
+        //todo map enum with modelMapper
+//        mapper.typeMap(StudentDto.class, StudentEntity.class)
+//                .addMappings(mapper -> mapper.map(src -> src.getGender().getDbValue(),
+//                        StudentEntity::setGender));
+//        return mapper.map(studentDto, StudentEntity.class);
     }
 
     public StudentDto fromEntityToDto(StudentEntity studentEntity) {

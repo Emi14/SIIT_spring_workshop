@@ -19,6 +19,9 @@ public class StudentEntity {
 
     private int age;
 
+//    @Column(nullable = false)
+    private Integer gender;
+
     private String email;
 
 //    @OneToMany
