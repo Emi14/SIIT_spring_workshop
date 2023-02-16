@@ -9,11 +9,12 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class SpringWorkshopApplicationTests {
 
-	@Value("${my.name}")
-	private String name;
-	@Test
-	void contextLoads() {
-		System.out.println(name);
-	}
+    @Value("${my.name}")
+    private String name;
+
+    @Test
+    void contextLoads() {
+        System.out.println(name);
+    }
 
 }

@@ -19,12 +19,12 @@ public class StudentEntity {
 
     private int age;
 
-//    @Column(nullable = false)
+    //    @Column(nullable = false)
     private Integer gender;
 
     private String email;
 
-//    @OneToMany
+    //    @OneToMany
 //    @JoinColumn(name = "student_id")
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<AddressEntity> addresses;

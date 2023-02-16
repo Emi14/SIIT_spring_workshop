@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Profile("test")
 //@Qualifier("serviceImplementation")
-public class GreetService implements IService{
+public class GreetService implements IService {
     @Override
     public String getCurrentTime() {
         return " Year - 2000.";

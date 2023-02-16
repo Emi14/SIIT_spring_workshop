@@ -2,10 +2,8 @@ package org.siit.springworkshop.controller;
 
 import jakarta.validation.Valid;
 import org.siit.springworkshop.dto.StudentDto;
-import org.siit.springworkshop.entity.StudentEntity;
 import org.siit.springworkshop.exception.DataNotFound;
 import org.siit.springworkshop.service.StudentService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,9 +66,9 @@ public class StudentController {
 
     @GetMapping("/all")
     public List<StudentDto> getAll(@RequestParam(name = "pageNumber") int pageNumber,
-                                      @RequestParam(name = "pageSize") int pageSize,
-                                      @RequestParam(name = "sortBy") String sortBy,
-                                      @RequestParam(name = "order") String order) {
+                                   @RequestParam(name = "pageSize") int pageSize,
+                                   @RequestParam(name = "sortBy") String sortBy,
+                                   @RequestParam(name = "order") String order) {
 //        return studentService.findAll();
         return studentService.findAllPaginated(pageNumber, pageSize, sortBy, order);
     }

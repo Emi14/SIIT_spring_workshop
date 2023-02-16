@@ -5,14 +5,13 @@ public enum Gender {
     FEMALE(2);
 
     int dbValue;
+
     Gender(int i) {
         dbValue = i;
     }
 
-    public Gender fromDbValue(int dbValue)
-    {
-        if (dbValue == MALE.dbValue)
-        {
+    public Gender fromDbValue(int dbValue) {
+        if (dbValue == MALE.dbValue) {
             return MALE;
         }
         return FEMALE;

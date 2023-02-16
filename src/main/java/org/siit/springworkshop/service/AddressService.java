@@ -37,15 +37,13 @@ public class AddressService {
 
     public AddressDto getAddressById(Long id) throws DataNotFound {
         Optional<AddressEntity> address = addressRepository.findById(id);
-        if(address.isEmpty())
-        {
+        if (address.isEmpty()) {
             throw new DataNotFound(String.format("The address with id %s could not be found", id));
         }
         return addressConverter.convertEntityToDto(address.get());
     }
 
-    public int deleteAddressesByStudentId(Long studentId)
-    {
+    public int deleteAddressesByStudentId(Long studentId) {
         return addressRepository.deleteAddressEntitiesByStudentId(studentId);
     }
 }

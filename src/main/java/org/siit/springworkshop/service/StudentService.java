@@ -36,8 +36,7 @@ public class StudentService {
         student.setAddresses(addressConverter.convertDtosToEntities(studentDto.getAddresses()));
         StudentEntity savedStudent = studentRepository.save(student);
 
-        if(throwExceptionOnSave)
-        {
+        if (throwExceptionOnSave) {
             throw new RuntimeException("Exception after student was saved");
         }
 
@@ -47,8 +46,7 @@ public class StudentService {
     }
 
     @Transactional
-    public Long saveStudentWithCascade(StudentDto studentDto)
-    {
+    public Long saveStudentWithCascade(StudentDto studentDto) {
         StudentEntity studentEntity = studentConverter.fromDtoToEntity(studentDto);
         studentEntity.setAddresses(addressConverter.convertDtosToEntities(studentDto.getAddresses()));
         studentEntity.getAddresses().forEach(address -> address.setStudent(studentEntity));
@@ -90,19 +88,17 @@ public class StudentService {
 
     @Transactional
     public void deleteStudentById(Long studentId, boolean throwExceptionOnSave) throws DataNotFound {
-        if(!studentRepository.existsById(studentId))
-        {
+        if (!studentRepository.existsById(studentId)) {
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", studentId));
         }
         addressService.deleteAddressesByStudentId(studentId);
-        if(throwExceptionOnSave)
-        {
+        if (throwExceptionOnSave) {
             throw new RuntimeException("Exception after student was saved");
         }
         studentRepository.deleteById(studentId);
     }
 
-    public void deleteStudentWithCascade(Long studentId)throws DataNotFound {
+    public void deleteStudentWithCascade(Long studentId) throws DataNotFound {
         if (!studentRepository.existsById(studentId)) {
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", studentId));
         }
@@ -110,26 +106,22 @@ public class StudentService {
     }
 
     public Long upsertStudent(StudentDto studentDto) throws DataNotFound {
-       if (studentDto.getId() != null)
-       {
-           return updateStudent(studentDto);
-       }
-       return saveStudentWithCascade(studentDto);
+        if (studentDto.getId() != null) {
+            return updateStudent(studentDto);
+        }
+        return saveStudentWithCascade(studentDto);
     }
 
     private Long updateStudent(StudentDto studentDto) throws DataNotFound {
         Optional<StudentEntity> studentEntityOptional = studentRepository.findById(studentDto.getId());
-        if(studentEntityOptional.isEmpty())
-        {
+        if (studentEntityOptional.isEmpty()) {
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", studentDto.getId()));
         }
         StudentEntity student = studentEntityOptional.get();
-        if(studentDto.getFirstName() != null)
-        {
+        if (studentDto.getFirstName() != null) {
             student.setFirstName(studentDto.getFirstName());
         }
-        if(studentDto.getLastName() != null)
-        {
+        if (studentDto.getLastName() != null) {
             student.setLastName(studentDto.getLastName());
         }
         return studentRepository.save(student).getId();
@@ -139,7 +131,7 @@ public class StudentService {
         return (List<StudentEntity>) studentRepository.findAll();
     }
 
-    public List<StudentDto> findAllPaginated(int pageNumber, int pageSize, String sortBy, String order){
+    public List<StudentDto> findAllPaginated(int pageNumber, int pageSize, String sortBy, String order) {
         Sort sort = getSort(sortBy, order);
 
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, sort);
@@ -155,14 +147,11 @@ public class StudentService {
 
     private Sort getSort(String sortBy, String order) {
         Sort sort;
-        if(order == null)
-        {
+        if (order == null) {
             sort = Sort.by(sortBy);
-        } else if(order.equalsIgnoreCase("ascending"))
-        {
-           sort = Sort.by(sortBy).ascending();
-        } else
-        {
+        } else if (order.equalsIgnoreCase("ascending")) {
+            sort = Sort.by(sortBy).ascending();
+        } else {
             sort = Sort.by(sortBy).descending();
         }
         return sort.and(Sort.by("id").ascending());

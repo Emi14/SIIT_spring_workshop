@@ -1,8 +1,6 @@
 package org.siit.springworkshop;
 
 import org.modelmapper.ModelMapper;
-import org.siit.springworkshop.dto.StudentDto;
-import org.siit.springworkshop.entity.StudentEntity;
 import org.siit.springworkshop.service.hello.HelloWorldService;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,34 +13,30 @@ import java.util.StringTokenizer;
 @SpringBootApplication
 public class SpringWorkshopApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringWorkshopApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringWorkshopApplication.class, args);
+    }
 
-	@Bean
+    @Bean
 //	@DependsOn("myBean")
-	public StringTokenizer getStringTokenizer()
-	{
-		return new StringTokenizer("ana are mere");
-	}
+    public StringTokenizer getStringTokenizer() {
+        return new StringTokenizer("ana are mere");
+    }
 
-	@Bean
-	@Qualifier("myBean")
-	public Object getMyBean()
-	{
-		return new Object();
-	}
+    @Bean
+    @Qualifier("myBean")
+    public Object getMyBean() {
+        return new Object();
+    }
 
-	@Lookup
-	public HelloWorldService getMyWorldService()
-	{
-		return null;
-	}
+    @Lookup
+    public HelloWorldService getMyWorldService() {
+        return null;
+    }
 
-	@Bean
-	public ModelMapper getMapper()
-	{
-		return new ModelMapper();
-	}
+    @Bean
+    public ModelMapper getMapper() {
+        return new ModelMapper();
+    }
 
 }

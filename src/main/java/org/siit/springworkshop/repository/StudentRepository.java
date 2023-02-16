@@ -6,7 +6,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +35,6 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
     List<StudentEntity> findAllByAddresses_City(String city);
 
     List<StudentEntity> findAll(Pageable pageable); //todo how to eliminate count query
+
     List<StudentEntity> findAll(Sort sort);
 }
