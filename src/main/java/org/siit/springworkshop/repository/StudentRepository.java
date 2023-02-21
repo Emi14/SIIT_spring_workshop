@@ -27,6 +27,7 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
     Optional<StudentEntity> findFirstByFirstNameOrderByIdDesc(String firstName);
 
     List<StudentEntity> findFirstThreeByFirstName(String name);
+    List<StudentEntity> findFirstSixByFirstName(String name);
 
     @Modifying
     @Query(value = "UPDATE students s SET s.age = :age WHERE s.id = :studentId")

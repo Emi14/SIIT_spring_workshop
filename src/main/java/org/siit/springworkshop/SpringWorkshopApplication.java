@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.StringTokenizer;
 
 @SpringBootApplication
+@EnableAsync
+//@EnableWebSecurity
 public class SpringWorkshopApplication {
 
     public static void main(String[] args) {
@@ -39,4 +42,9 @@ public class SpringWorkshopApplication {
         return new ModelMapper();
     }
 
+//    @Bean
+//    public DefaultSecurityFilterChain securityWebFilterChain(HttpSecurity serverHttpSecurity) throws Exception {
+//        return serverHttpSecurity.authorizeRequests()
+//                .requestMatchers("/actuator/**").permitAll().and().build();
+//    }
 }

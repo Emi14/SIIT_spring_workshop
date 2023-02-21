@@ -6,9 +6,11 @@ import org.siit.springworkshop.converter.StudentConverter;
 import org.siit.springworkshop.dto.StudentDto;
 import org.siit.springworkshop.entity.StudentEntity;
 import org.siit.springworkshop.exception.DataNotFound;
+import org.siit.springworkshop.helper.StudentInfoContributor;
 import org.siit.springworkshop.repository.StudentRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +24,14 @@ public class StudentService {
     private final AddressService addressService;
     private final StudentConverter studentConverter;
     private final AddressConverter addressConverter;
+    private final StudentInfoContributor studentInfoContributor;
 
-    public StudentService(StudentRepository studentRepository, AddressService addressService, StudentConverter studentConverter, AddressConverter addressConverter) {
+    public StudentService(StudentRepository studentRepository, AddressService addressService, StudentConverter studentConverter, AddressConverter addressConverter, StudentInfoContributor studentInfoContributor) {
         this.studentRepository = studentRepository;
         this.addressService = addressService;
         this.studentConverter = studentConverter;
         this.addressConverter = addressConverter;
+        this.studentInfoContributor = studentInfoContributor;
     }
 
     @Transactional
@@ -58,6 +62,7 @@ public class StudentService {
         Optional<StudentEntity> student = studentRepository.findById(id);
 
         if (student.isEmpty()) {
+            studentInfoContributor.incrementNumberOfDataNotFoundExceptions();
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", id));
         }
         return studentConverter.fromEntityToDto(student.get());
@@ -69,6 +74,7 @@ public class StudentService {
         List<StudentEntity> student = studentRepository.findAllByFirstNameAndAge(firstName, age);
         List<StudentEntity> studentEntitiesByCity = studentRepository.findAllByAddresses_City("Bucharest");
         if (student.isEmpty()) {
+            studentInfoContributor.incrementNumberOfDataNotFoundExceptions();
             throw new DataNotFound(String.format("The student with first name %s and age %s could not be found in database.", firstName, age));
         }
         return studentConverter.fromEntityToDto(student.get(0));
@@ -81,6 +87,7 @@ public class StudentService {
         Optional<StudentEntity> student = studentRepository.findFirstByFirstNameOrderByIdDesc(firstName);
 
         if (student.isEmpty()) {
+            studentInfoContributor.incrementNumberOfDataNotFoundExceptions();
             throw new DataNotFound(String.format("The student with first name %s and age %s could not be found in database.", firstName, age));
         }
         return studentConverter.fromEntityToDto(student.get());
@@ -89,6 +96,7 @@ public class StudentService {
     @Transactional
     public void deleteStudentById(Long studentId, boolean throwExceptionOnSave) throws DataNotFound {
         if (!studentRepository.existsById(studentId)) {
+            studentInfoContributor.incrementNumberOfDataNotFoundExceptions();
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", studentId));
         }
         addressService.deleteAddressesByStudentId(studentId);
@@ -100,6 +108,7 @@ public class StudentService {
 
     public void deleteStudentWithCascade(Long studentId) throws DataNotFound {
         if (!studentRepository.existsById(studentId)) {
+            studentInfoContributor.incrementNumberOfDataNotFoundExceptions();
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", studentId));
         }
         studentRepository.deleteById(studentId);
@@ -115,6 +124,7 @@ public class StudentService {
     private Long updateStudent(StudentDto studentDto) throws DataNotFound {
         Optional<StudentEntity> studentEntityOptional = studentRepository.findById(studentDto.getId());
         if (studentEntityOptional.isEmpty()) {
+            studentInfoContributor.incrementNumberOfDataNotFoundExceptions();
             throw new DataNotFound(String.format("The student with id %s could not be found in database.", studentDto.getId()));
         }
         StudentEntity student = studentEntityOptional.get();
@@ -155,5 +165,17 @@ public class StudentService {
             sort = Sort.by(sortBy).descending();
         }
         return sort.and(Sort.by("id").ascending());
+    }
+
+    @Async
+    public void sendEmail(String studentId, boolean throwExceptionOnSend) throws InterruptedException {
+
+        /*
+        Call email service - duration 5000ms
+         */
+        Thread.sleep(5000);
+
+        System.out.println("The email is going to be sent for student id " + studentId);
+        studentInfoContributor.incrementNumberOfSentEmails();
     }
 }

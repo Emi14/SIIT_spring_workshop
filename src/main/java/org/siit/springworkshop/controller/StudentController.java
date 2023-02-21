@@ -73,4 +73,16 @@ public class StudentController {
         return studentService.findAllPaginated(pageNumber, pageSize, sortBy, order);
     }
 
+    @PostMapping("/send/email/{id}")
+    public ResponseEntity<String> sendEmail(@PathVariable(name = "id") String studentId,
+                                            @RequestHeader(name = "debugHeaderThrowExceptionOnSendingEmail", defaultValue= "false") boolean throwExceptionOnSend) {
+        try {
+            studentService.sendEmail(studentId, throwExceptionOnSend);
+        } catch (Exception e) {
+            return new ResponseEntity<>("There was an exception. Try again later.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        /*call other logic in main thread*/
+        return new ResponseEntity<>("Email is going to be sent.", HttpStatus.OK);
+    }
+
 }
